@@ -11,9 +11,13 @@ namespace TodoApp.Pages
 {
     public class MyTodosModel : PageModel
     {
+        public List<Models.Todo> Todos { get; set; }
+
+        [BindProperty]
+        public Models.Todo NewTodo { get; set; }
 
         private readonly ILogger<ErrorModel> _logger;
-        public List<Models.Todo> Todos;
+
         public MyTodosModel(ILogger<ErrorModel> logger)
         {
             _logger = logger;
@@ -34,12 +38,7 @@ namespace TodoApp.Pages
         {
             _logger.LogInformation("Nu fick vi en POST request");
 
-            StringValues action = Request.Form["Action"];
-            StringValues isDone = Request.Form["IsDone"];
-            Todos.Add(new Models.Todo() { 
-                Action = action, 
-                IsDone = isDone.ToString() == "on" 
-            });
+            Todos.Add(NewTodo);
         }
     }
 }

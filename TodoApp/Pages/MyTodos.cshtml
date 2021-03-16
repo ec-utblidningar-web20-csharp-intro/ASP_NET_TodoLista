@@ -4,12 +4,10 @@
     Layout = "";
 }
 
-<!-- vi vill visa en lista med ToDos! -->
 <!--
-    - Köpa mjölk
-    - Vattna blommorna ✓
-    - Gå ut med hunden ✓
-    - Skriva inlämningsrapporten
+    Model Binding
+    Tag Helpers
+    (Routing)
 -->
 
 <ul>
@@ -19,16 +17,17 @@
     }
 </ul>
 
+
 <h3>Skriv en ny todo</h3>
 <form method="post">
     <ul >
         <li>
             <label for="Action">Vad du vill göra</label>
-            <input type="text" name="Action" id="Action" />
+            <input asp-for="NewTodo.Action" />
         </li>
         <li>
             <label for="IsDone">Är du klar redan?</label>
-            <input type="checkbox" name="IsDone" id="IsDone" />
+            <input asp-for="NewTodo.IsDone" />
         </li>
     </ul>
 
