@@ -2,16 +2,7 @@
 @model TodoApp.Pages.MyTodosModel
 @{
     Layout = "";
-
-    List<Models.Todo> todos = new List<Models.Todo>()
-    {
-        new Models.Todo() { Action = "Köpa mjölk" },
-        new Models.Todo() { Action = "Vattna blommorna", IsDone=true },
-        new Models.Todo() { Action = "Gå ut med hunden", IsDone=true },
-        new Models.Todo() { Action = "Skriva inlämningsrapporten" },
-    };
 }
-
 
 <!-- vi vill visa en lista med ToDos! -->
 <!--
@@ -24,7 +15,7 @@
 <ul>
     @for (int i = 0; i < 4; i++)
     {
-        Models.Todo todo = todos[i];
+        Models.Todo todo = Model.Todos[i];
         <li>@todo.Action @(todo.IsDone ? "✓" : "")</li>
     }
 </ul>
