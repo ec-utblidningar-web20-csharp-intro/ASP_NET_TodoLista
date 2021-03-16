@@ -1,0 +1,42 @@
+﻿@page
+@model TodoApp.Pages.MyTodosModel
+@{
+    Layout = "";
+
+    List<Models.Todo> todos = new List<Models.Todo>()
+    {
+        new Models.Todo() { Action = "Köpa mjölk" },
+        new Models.Todo() { Action = "Vattna blommorna", IsDone=true },
+        new Models.Todo() { Action = "Gå ut med hunden", IsDone=true },
+        new Models.Todo() { Action = "Skriva inlämningsrapporten" },
+    };
+}
+
+
+<!-- vi vill visa en lista med ToDos! -->
+<!--
+    - Köpa mjölk
+    - Vattna blommorna ✓
+    - Gå ut med hunden ✓
+    - Skriva inlämningsrapporten
+-->
+
+<ul>
+    <li>Köpa mjölk</li>
+    <li>Vattna blommorna ✓</li>
+    <li>Gå ut med hunden ✓</li>
+    <li>Skriva inlämningsrapporten</li>
+</ul>
+
+<style>
+    .hlist {
+        display: flex;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+    .hlist li {
+        list-style-type: none;
+        padding: 5px;
+    }
+</style>

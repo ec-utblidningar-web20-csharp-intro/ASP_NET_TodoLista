@@ -16,7 +16,6 @@ namespace TodoApp.Pages
         {
             this._logger = logger;
         }
-
         public string MyMessage { get; set; }
 
         // detta är en PageHandler för http GET requests
