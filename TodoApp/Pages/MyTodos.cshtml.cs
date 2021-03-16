@@ -17,18 +17,15 @@ namespace TodoApp.Pages
         public Models.Todo NewTodo { get; set; }
 
         private readonly ILogger<ErrorModel> _logger;
+        private readonly Data.TodoDbContext _context;
 
-        public MyTodosModel(ILogger<ErrorModel> logger)
+        public MyTodosModel(ILogger<ErrorModel> logger,
+            Data.TodoDbContext context)
         {
+            _context = context;
             _logger = logger;
 
-            Todos = new List<Models.Todo>()
-            {
-                new Models.Todo() { Action = "Köpa mjölk" },
-                new Models.Todo() { Action = "Vattna blommorna", IsDone=true },
-                new Models.Todo() { Action = "Gå ut med hunden", IsDone=true },
-                new Models.Todo() { Action = "Skriva inlämningsrapporten" },
-            };
+            Todos = _context.Todos.ToList();
         }
         public void OnGet()
         {
@@ -39,6 +36,8 @@ namespace TodoApp.Pages
             _logger.LogInformation("Nu fick vi en POST request");
 
             Todos.Add(NewTodo);
+            _context.Todos.Add(NewTodo);
+            _context.SaveChanges();
         }
     }
 }
