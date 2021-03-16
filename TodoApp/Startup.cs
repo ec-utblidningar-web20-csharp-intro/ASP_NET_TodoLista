@@ -49,6 +49,8 @@ namespace TodoApp
 
             app.UseEndpoints(endpoints =>
             {
+                // lite förklaring kring hur mappningen sker
+                // https://www.learnrazorpages.com/razor-pages/routing
                 endpoints.MapRazorPages();
             });
         }
