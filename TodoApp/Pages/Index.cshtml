@@ -1,0 +1,22 @@
+﻿@page
+<!-- @@page säger att detta är en RazorPage endpoint -->
+<!-- '/' och '/Index' leder båda till denna RP -->
+
+<!-- @@model säger vilken klass som hamnar i "Model" propertyn -->
+@model IndexModel
+@{
+    // Exempel på propertys i en RazorPage
+
+    //Layout - vilken layout vi använder
+    //Request - våran http request
+    //Model - vårat IndexModel objekt
+    //ViewData - en dictionary som delas mellan .cshtml filer
+
+
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
