@@ -22,10 +22,11 @@
 -->
 
 <ul>
-    <li>Köpa mjölk</li>
-    <li>Vattna blommorna ✓</li>
-    <li>Gå ut med hunden ✓</li>
-    <li>Skriva inlämningsrapporten</li>
+    @for (int i = 0; i < 4; i++)
+    {
+        Models.Todo todo = todos[i];
+        <li>@todo.Action @(todo.IsDone ? "✓" : "")</li>
+    }
 </ul>
 
 <style>
