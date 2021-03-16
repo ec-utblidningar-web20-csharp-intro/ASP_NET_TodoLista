@@ -13,12 +13,29 @@
 -->
 
 <ul>
-    @for (int i = 0; i < 4; i++)
+    @foreach(var todo in Model.Todos)
     {
-        Models.Todo todo = Model.Todos[i];
         <li>@todo.Action @(todo.IsDone ? "✓" : "")</li>
     }
 </ul>
+
+<h3>Skriv en ny todo</h3>
+<form method="post">
+    <ul >
+        <li>
+            <label for="Action">Vad du vill göra</label>
+            <input type="text" name="Action" id="Action" />
+        </li>
+        <li>
+            <label for="IsDone">Är du klar redan?</label>
+            <input type="checkbox" name="IsDone" id="IsDone" />
+        </li>
+    </ul>
+
+    <input type="submit" />
+</form>
+
+
 
 <style>
     .hlist {
