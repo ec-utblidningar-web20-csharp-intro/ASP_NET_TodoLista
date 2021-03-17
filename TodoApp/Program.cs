@@ -20,7 +20,34 @@ namespace TodoApp
             {
                 var context = scope.ServiceProvider.GetRequiredService<Data.TodoDbContext>();
 
-                //do seeding
+                Models.Todo rec = null;
+
+                // [C]reate
+                // lägga till record
+                rec = new Models.Todo() { Action = "hej", IsDone = false };
+                context.Todos.Add(rec);
+                context.SaveChanges();
+
+                // [R]ead
+                // läsa av records
+                List<Models.Todo> recs = context.Todos.ToList();
+                foreach (var record in recs)
+                {
+                    Console.WriteLine(record.Action);
+                }
+
+                // [U]pdate
+                // uppdatera record
+                rec = context.Todos.FirstOrDefault();
+                rec.IsDone = true;
+                context.Todos.Update(rec);
+                context.SaveChanges();
+
+                // [D]elete
+                // radera record
+                rec = context.Todos.Where(r => r.IsDone == true).FirstOrDefault();
+                context.Todos.Remove(rec);
+                context.SaveChanges();
             }
 
             host.Run();
