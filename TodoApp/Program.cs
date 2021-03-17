@@ -16,26 +16,14 @@ namespace TodoApp
         {
             var host = CreateHostBuilder(args).Build();
 
-            CreateDbIfNotExists(host);
-
-            host.Run();
-        }
-        private static void CreateDbIfNotExists(IHost host)
-        {
             using (var scope = host.Services.CreateScope())
             {
-                var services = scope.ServiceProvider;
-                try
-                {
-                    var context = services.GetRequiredService<Data.TodoDbContext>();
-                    context.Seed();
-                }
-                catch (Exception ex)
-                {
-                    var logger = services.GetRequiredService<ILogger<Program>>();
-                    logger.LogError(ex, "An error occurred creating the DB.");
-                }
+                var context = scope.ServiceProvider.GetRequiredService<Data.TodoDbContext>();
+
+                //do seeding
             }
+
+            host.Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
