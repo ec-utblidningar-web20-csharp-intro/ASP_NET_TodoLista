@@ -15,42 +15,26 @@ namespace TodoApp
         public static void Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
+            SeedDb(host);
+            host.Run();
+        }
 
+        static void SeedDb(IHost host)
+        {
             using (var scope = host.Services.CreateScope())
             {
                 var context = scope.ServiceProvider.GetRequiredService<Data.TodoDbContext>();
 
-                Models.Todo rec = null;
+                context.Todos.RemoveRange(context.Todos);
 
-                // [C]reate
-                // lägga till record
-                rec = new Models.Todo() { Action = "hej", IsDone = false };
-                context.Todos.Add(rec);
-                context.SaveChanges();
+                context.Todos.AddRange(new List<Models.Todo>() {
+                    new Models.Todo(){ Action="Vattna blommorna"},
+                    new Models.Todo(){ Action="Vattna elefanten"},
+                    new Models.Todo(){ Action="Gå med hunden"},
+                });
 
-                // [R]ead
-                // läsa av records
-                List<Models.Todo> recs = context.Todos.ToList();
-                foreach (var record in recs)
-                {
-                    Console.WriteLine(record.Action);
-                }
-
-                // [U]pdate
-                // uppdatera record
-                rec = context.Todos.FirstOrDefault();
-                rec.IsDone = true;
-                context.Todos.Update(rec);
-                context.SaveChanges();
-
-                // [D]elete
-                // radera record
-                rec = context.Todos.Where(r => r.IsDone == true).FirstOrDefault();
-                context.Todos.Remove(rec);
                 context.SaveChanges();
             }
-
-            host.Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

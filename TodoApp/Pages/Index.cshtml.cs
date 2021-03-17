@@ -16,19 +16,10 @@ namespace TodoApp.Pages
         {
             this._logger = logger;
         }
-        public string MyMessage { get; set; }
 
         // detta är en PageHandler för http GET requests
         public void OnGet()
         {
-            MyMessage = "Hej min vän, allt är";
-            MyMessage += this.Response.StatusCode;
-        }
-
-        // detta är en PageHandler för http OPTION requests
-        public void OnOption()
-        {
-
         }
     }
 }
