@@ -17,6 +17,18 @@ namespace TodoApp
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
+            using (var context = 
+                new Data.TodoDbContext(
+                    new DbContextOptionsBuilder<Data.TodoDbContext>()
+                        .UseSqlServer(Configuration.GetConnectionString("DbContext"))
+                        .Options
+                    )
+                )
+            {
+                context.Database.EnsureCreated();
+                context.Seed();
+            }
         }
 
         public IConfiguration Configuration { get; }

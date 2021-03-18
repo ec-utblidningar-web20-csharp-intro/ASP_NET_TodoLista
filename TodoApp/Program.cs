@@ -14,27 +14,16 @@ namespace TodoApp
     {
         public static void Main(string[] args)
         {
-            var host = CreateHostBuilder(args).Build();
-            SeedDb(host);
-            host.Run();
-        }
+            var host = CreateHostBuilder(args).Build(); // ConfigureServices
 
-        static void SeedDb(IHost host)
-        {
             using (var scope = host.Services.CreateScope())
             {
-                var context = scope.ServiceProvider.GetRequiredService<Data.TodoDbContext>();
-
-                context.Todos.RemoveRange(context.Todos);
-
-                context.Todos.AddRange(new List<Models.Todo>() {
-                    new Models.Todo(){ Action="Vattna blommorna"},
-                    new Models.Todo(){ Action="Vattna elefanten"},
-                    new Models.Todo(){ Action="Gå med hunden"},
-                });
-
-                context.SaveChanges();
+                var services = scope.ServiceProvider;
+                var context = services.GetRequiredService<Data.TodoDbContext>();
+                context.Seed();
             }
+
+            host.Run(); // Kicka igång webservern
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
