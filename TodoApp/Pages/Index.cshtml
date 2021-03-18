@@ -1,22 +1,42 @@
 ﻿@page
-<!-- @@page säger att detta är en RazorPage endpoint -->
-<!-- '/' och '/Index' leder båda till denna RP -->
-
-<!-- @@model säger vilken klass som hamnar i "Model" propertyn -->
-@model IndexModel
+@model TodoApp.Pages.IndexModel
 
 @{
-    // Exempel på propertys i en RazorPage
-
-    //Layout - vilken layout vi använder
-    //Request - våran http request
-    //Model - vårat IndexModel objekt
-    //ViewData - en dictionary som delas mellan .cshtml filer
-
-
-    ViewData["Title"] = "Home page";
-
-    //Layout = "";
+    ViewData["Title"] = "Index";
 }
 
-<button ><a asp-page="Todos">Todo</a></button>
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                What to do
+            </th>
+            <th>
+                Am I done
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Todo) {
+        <tr>
+            <td>
+                @item.Action
+            </td>
+            <td>
+                <input class="check-box" disabled="disabled" type="checkbox" @(item.IsDone ? "checked=\"true\"" : "")>
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

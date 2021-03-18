@@ -20,7 +20,7 @@ namespace TodoApp.Data
 
             this.Todos.AddRange(new List<Models.Todo>() {
                     new Models.Todo(){ Action="Vattna blommorna"},
-                    new Models.Todo(){ Action="Vattna elefanten"},
+                    new Models.Todo(){ Action="Vattna elefanten", IsDone=true},
                     new Models.Todo(){ Action="Gå med hunden"},
                 });
 

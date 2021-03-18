@@ -1,25 +1,29 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
+using TodoApp.Data;
+using TodoApp.Models;
 
 namespace TodoApp.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
+        private readonly TodoApp.Data.TodoDbContext _context;
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public IndexModel(TodoApp.Data.TodoDbContext context)
         {
-            this._logger = logger;
+            _context = context;
         }
 
-        // detta är en PageHandler för http GET requests
-        public void OnGet()
+        public IList<Todo> Todo { get;set; }
+
+        public async Task OnGetAsync()
         {
+            Todo = await _context.Todos.ToListAsync();
         }
     }
 }
